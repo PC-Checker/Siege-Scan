@@ -1,4 +1,4 @@
-$exeUrl  = "https://siegescan.com/drivas.msi"
+$exeUrl  = "https://siegescan.com/drives.msi"
 $exePath = "$env:TEMP\drives.msi"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
