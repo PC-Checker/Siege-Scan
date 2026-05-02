@@ -312,7 +312,7 @@ function Delete-FileIfExists {
         Remove-Item -Path $filePath -Force -ErrorAction SilentlyContinue
     }
 }
-Full paths to the target file in Desktop and Downloads folders
+# Full paths to the target file in Desktop and Downloads folders
 $targetFileDesktop = Join-Path -Path $desktopPath -ChildPath "PcCheck.txt"
 $targetFileDownloads = Join-Path -Path $downloadsPath -ChildPath "PcCheck.txt"
 
