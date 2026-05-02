@@ -314,7 +314,7 @@ $space = " " * 12  # Increased the number of spaces for more right alignment
 
 # Print the red "SCAN COMPLETE" line with more white space to the right
 Write-Host "`n$space╭─────────────────────────────────────╮" -ForegroundColor $yellow
-Write-Host "$space│    SCAN COMPLETE - Siege Scan v1.2    │" -ForegroundColor $yellow
+Write-Host "$space│    SCAN COMPLETE - Siege Scan v1.2  │" -ForegroundColor $yellow
 Write-Host "$space╰─────────────────────────────────────╯" -ForegroundColor $yellow
 
 
