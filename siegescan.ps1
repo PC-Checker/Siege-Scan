@@ -5,18 +5,6 @@ Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 
 Start-Process $exePath
 
-$banner = @"
-███████╗██╗███████╗ ██████╗ ███████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗
-██╔════╝██║██╔════╝██╔════╝ ██╔════╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║
-███████╗██║█████╗  ██║  ███╗█████╗      ███████╗██║     ███████║██╔██╗ ██║
-╚════██║██║██╔══╝  ██║   ██║██╔══╝      ╚════██║██║     ██╔══██║██║╚██╗██║
-███████║██║███████╗╚██████╔╝███████╗    ███████║╚██████╗██║  ██║██║ ╚████║
-╚══════╝╚═╝╚══════╝ ╚═════╝ ╚══════╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
-
-                         SIEGE SCAN
-                  SYSTEM ANALYSIS TOOL
-"@
-
 
 Clear-Host
 $encodedTitle = "Q3JlYXRlZCBCeSBaZXlza2kgb24gRGlzY29yZA=="
@@ -311,7 +299,7 @@ function Delete-FileIfExists {
         Remove-Item -Path $filePath -Force -ErrorAction SilentlyContinue
     }
 }
-# Full paths to the target file in Desktop and Downloads folders
+
 $targetFileDesktop = Join-Path -Path $desktopPath -ChildPath "PcCheck.txt"
 $targetFileDownloads = Join-Path -Path $downloadsPath -ChildPath "PcCheck.txt"
 
@@ -326,7 +314,7 @@ $space = " " * 12  # Increased the number of spaces for more right alignment
 
 # Print the red "SCAN COMPLETE" line with more white space to the right
 Write-Host "`n$space╭─────────────────────────────────────╮" -ForegroundColor $yellow
-Write-Host "$space│            SCAN COMPLETE            │" -ForegroundColor $yellow
+Write-Host "$space│    SCAN COMPLETE - Siege Scan v1.2    │" -ForegroundColor $yellow
 Write-Host "$space╰─────────────────────────────────────╯" -ForegroundColor $yellow
 
 
