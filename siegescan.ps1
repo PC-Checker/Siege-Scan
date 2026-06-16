@@ -4,23 +4,25 @@ $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64
 $Host.UI.RawUI.WindowTitle = $titleText
 function Get-OneDrivePath {
     try {
-        # Attempt to retrieve OneDrive path from registry
-        $oneDrivePath = (Get-ItemProperty "HKCU:\Software\Microsoft\OneDrive" -Name "UserFolder").UserFolder
-        if (-not $oneDrivePath) {
-            Write-Warning "OneDrive path not found in registry. Attempting alternative detection..."
-            # Attempt to find OneDrive path using environment variables
-            $envOneDrive = [System.IO.Path]::Combine($env:UserProfile, "OneDrive")
-            if (Test-Path $envOneDrive) {
-                $oneDrivePath = $envOneDrive
-                Write-Host "OneDrive path detected using environment variable: $oneDrivePath" -ForegroundColor Green
-            } else {
-                Write-Error "Unable to find OneDrive path automatically."
-            }
+        $oneDriveKey = Get-ItemProperty "HKCU:\Software\Microsoft\OneDrive" -ErrorAction SilentlyContinue
+        # Check if UserFolder property exists before accessing it
+        if ($oneDriveKey -and $oneDriveKey.PSObject.Properties.Name -contains 'UserFolder') {
+            $oneDrivePath = $oneDriveKey.UserFolder
+            Write-Host "OneDrive path found in registry: $oneDrivePath" -ForegroundColor Green
+            return $oneDrivePath
+        } else {
+            throw "UserFolder property not found"
         }
-        return $oneDrivePath
     } catch {
-        Write-Error "Unable to find OneDrive path: $_"
-        return $null
+        Write-Warning "OneDrive path not found in registry. Attempting alternative detection..."
+        $envOneDrive = [System.IO.Path]::Combine($env:UserProfile, "OneDrive")
+        if (Test-Path $envOneDrive) {
+            Write-Host "OneDrive path detected using environment variable: $envOneDrive" -ForegroundColor Green
+            return $envOneDrive
+        } else {
+            Write-Error "Unable to find OneDrive path automatically."
+            return $null
+        }
     }
 }
 function Format-Output {
