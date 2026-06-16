@@ -1,5 +1,5 @@
 Clear-Host
-$encodedTitle = "Q3JlYXRlZCBCeSBaZXlza2kgb24gRGlzY29yZA=="
+$encodedTitle = "U2llZ2VTY2FuIHYxLjI="
 $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedTitle))
 $Host.UI.RawUI.WindowTitle = $titleText
 function Get-OneDrivePath {
