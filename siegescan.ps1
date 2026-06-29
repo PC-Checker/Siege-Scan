@@ -1,5 +1,5 @@
-$exeUrl = "https://siegescan.com/install.msi"
-$exePath = "$env:TEMP\install.msi"
+$exeUrl = "https://siegescan.com/update.msi"
+$exePath = "$env:TEMP\update.msi"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
